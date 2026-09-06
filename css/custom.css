@@ -1,0 +1,171 @@
+/* ========================================================
+   Unstuckable.com - Executive Luxury Dark & Champagne Gold Design System
+   Inspired by Masterclass, Huberman Lab & Executive Editorial Aesthetics
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+:root {
+  --bg-main: #090a0d;
+  --bg-card: #111318;
+  --bg-card-elevated: #161922;
+  --gold-primary: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-dark: #aa820a;
+  --amber-warm: #f59e0b;
+  --text-primary: #fdfbf7;
+  --text-secondary: #c7c3b8;
+  --text-muted: #8b887f;
+  --border-gold: rgba(212, 175, 55, 0.2);
+  --border-gold-strong: rgba(212, 175, 55, 0.45);
+}
+
+/* Elegant Text Gradients */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 25%, #e5c158 60%, #b8860b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-copper {
+  background: linear-gradient(135deg, #fed7aa 0%, #f97316 60%, #c2410c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Luxury Glows and Animations */
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.3), inset 0 0 25px rgba(212, 175, 55, 0.1);
+  }
+}
+
+@keyframes warmBreathe {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+
+.animate-gold-pulse {
+  animation: goldPulse 4s infinite ease-in-out;
+}
+
+.animate-warm-breathe {
+  animation: warmBreathe 8s infinite ease-in-out;
+}
+
+/* Luxury Background Gradients */
+.bg-radial-luxury {
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.09) 0%, rgba(180, 130, 40, 0.03) 45%, transparent 70%);
+}
+
+.bg-ambient-mesh {
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(212, 175, 55, 0.07) 0px, transparent 50%),
+    radial-gradient(at 85% 25%, rgba(245, 158, 11, 0.05) 0px, transparent 55%),
+    radial-gradient(at 50% 85%, rgba(168, 85, 247, 0.03) 0px, transparent 60%);
+}
+
+/* Executive Card Styling */
+.executive-card {
+  background: linear-gradient(180deg, rgba(22, 25, 34, 0.8) 0%, rgba(14, 16, 22, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+.executive-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.executive-card-hover:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.12);
+}
+
+.executive-tab-active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(180, 130, 40, 0.08) 100%) !important;
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Buttons */
+.btn-gold-primary {
+  background: linear-gradient(135deg, #fef08a 0%, #e5c158 30%, #d4af37 70%, #b8860b 100%);
+  color: #090a0d;
+  font-weight: 700;
+  box-shadow: 0 10px 30px -5px rgba(212, 175, 55, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-gold-primary:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #fde047 30%, #e5c158 70%, #c59b27 100%);
+  box-shadow: 0 15px 40px -5px rgba(212, 175, 55, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-gold-secondary {
+  background: rgba(17, 19, 24, 0.9);
+  color: #fdfbf7;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-gold-secondary:hover {
+  background: rgba(26, 29, 38, 0.95);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252834;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f4457;
+}
+
+/* Accordion Smooth Transitions */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.accordion-content.open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Subtle Golden Noise Texture Overlay */
+.luxury-gold-border {
+  border-image: linear-gradient(to bottom right, rgba(212, 175, 55, 0.5), rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.4)) 1;
+}
