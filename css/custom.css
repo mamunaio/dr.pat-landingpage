@@ -12,6 +12,11 @@
   --gold-primary: #d4af37;
   --gold-light: #f3e5ab;
   --gold-dark: #aa820a;
+  --brand-orange: #f97316;
+  --brand-orange-bright: #ff6b00;
+  --brand-royal-blue: #2563eb;
+  --brand-purple: #a855f7;
+  --brand-cyan: #06b6d4;
   --amber-warm: #f59e0b;
   --text-primary: #fdfbf7;
   --text-secondary: #c7c3b8;
@@ -23,6 +28,18 @@
 /* Elegant Text Gradients */
 .text-gradient-gold {
   background: linear-gradient(135deg, #ffffff 0%, #fef3c7 25%, #e5c158 60%, #b8860b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #ffedd5 0%, #fb923c 40%, #ea580c 80%, #c2410c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-slide-glide {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
