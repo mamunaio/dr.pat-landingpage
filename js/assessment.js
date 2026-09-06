@@ -1,7 +1,7 @@
 /**
  * Unstuckable.com - The 2-Minute Diagnostic Index Engine
  * Executive Luxury Theme (Champagne Gold & Warm Obsidian)
- * Grounded in Dr. Pat Baccili's S.L.I.D.E. Framework
+ * Upgraded Micro-Animations & Dynamic Feedback
  */
 
 const diagnosticData = {
@@ -260,7 +260,7 @@ class AssessmentEngine {
   }
 
   updateProgress() {
-    const totalSteps = diagnosticData.questions.length + 1; // +1 for lead capture
+    const totalSteps = diagnosticData.questions.length + 1;
     const currentStep = this.currentQuestionIndex + 1;
     const percent = Math.round((this.currentQuestionIndex / totalSteps) * 100);
     
@@ -279,12 +279,12 @@ class AssessmentEngine {
     this.updateProgress();
 
     this.container.innerHTML = `
-      <div class="transition-all duration-300 transform opacity-0 translate-y-2" id="question-card">
+      <div class="transition-all duration-300 transform opacity-0 translate-y-3" id="question-card">
         
         <!-- Header Pill & Step Meta -->
         <div class="flex items-center justify-between mb-5">
-          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#d4af37]/10 text-[#fde047] border border-[#d4af37]/25">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse"></span>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#ff6b00]/15 text-[#fb923c] border border-[#ff6b00]/30 animate-pulse">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#ff6b00]"></span>
             ${q.title}
           </span>
           <span class="text-xs text-stone-400 font-medium font-serif italic">Question ${this.currentQuestionIndex + 1} of 5</span>
@@ -295,17 +295,17 @@ class AssessmentEngine {
           ${q.question}
         </h3>
 
-        <!-- Options List -->
+        <!-- Options List with Staggered Entrance -->
         <div class="space-y-3.5">
           ${q.options.map((opt, idx) => `
             <button 
               type="button" 
               onclick="window.assessmentInstance.selectOption('${opt.pillar}', ${opt.weight}, ${idx})"
-              class="option-btn group w-full text-left p-4 sm:p-5 rounded-2xl bg-[#141720]/80 hover:bg-[#1a1e2a] border border-stone-800 hover:border-[#d4af37]/50 transition-all duration-200 flex items-start gap-4 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/40 cursor-pointer shadow-lg"
+              class="option-btn group w-full text-left p-4 sm:p-5 rounded-2xl bg-[#131622]/90 hover:bg-[#191d2c] border border-stone-800 hover:border-[#ff6b00]/50 transition-all duration-200 flex items-start gap-4 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 cursor-pointer shadow-lg hover:translate-x-1"
               id="opt-btn-${idx}"
             >
-              <div class="w-7 h-7 rounded-xl border border-stone-700 group-hover:border-[#d4af37] flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#d4af37]/15 transition-all">
-                <span class="text-xs font-serif font-bold text-stone-400 group-hover:text-[#fde047]">${String.fromCharCode(65 + idx)}</span>
+              <div class="w-7 h-7 rounded-xl border border-stone-700 group-hover:border-[#ff6b00] flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-[#ff6b00]/15 transition-all">
+                <span class="text-xs font-serif font-bold text-stone-400 group-hover:text-[#ffedd5]">${String.fromCharCode(65 + idx)}</span>
               </div>
               <span class="text-sm sm:text-base text-stone-200 group-hover:text-[#fdfbf7] leading-relaxed font-normal">
                 ${opt.text}
@@ -320,9 +320,9 @@ class AssessmentEngine {
             <button 
               type="button" 
               onclick="window.assessmentInstance.previousQuestion()"
-              class="text-xs sm:text-sm text-stone-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+              class="text-xs sm:text-sm text-stone-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer group"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
               Previous Question
             </button>
           ` : `<div></div>`}
@@ -337,7 +337,7 @@ class AssessmentEngine {
     setTimeout(() => {
       const card = document.getElementById("question-card");
       if (card) {
-        card.classList.remove("opacity-0", "translate-y-2");
+        card.classList.remove("opacity-0", "translate-y-3");
       }
     }, 20);
   }
@@ -348,7 +348,7 @@ class AssessmentEngine {
 
     const btn = document.getElementById(`opt-btn-${optIndex}`);
     if (btn) {
-      btn.classList.add("ring-2", "ring-[#d4af37]", "bg-[#d4af37]/10", "border-[#d4af37]");
+      btn.classList.add("ring-2", "ring-[#ff6b00]", "bg-[#ff6b00]/15", "border-[#ff6b00]", "scale-[1.01]");
     }
 
     setTimeout(() => {
@@ -358,7 +358,7 @@ class AssessmentEngine {
       } else {
         this.renderLeadCapture();
       }
-    }, 250);
+    }, 240);
   }
 
   previousQuestion() {
@@ -377,9 +377,9 @@ class AssessmentEngine {
     if (this.progressText) this.progressText.innerText = "Final Step: Generate Executive Dossier";
 
     this.container.innerHTML = `
-      <div class="transition-all duration-300 transform opacity-0 translate-y-2" id="lead-capture-card">
+      <div class="transition-all duration-300 transform opacity-0 translate-y-3 animate-spring-pop" id="lead-capture-card">
         <div class="text-center mb-8">
-          <div class="inline-flex p-3 rounded-2xl bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#fde047] mb-4 shadow-xl shadow-[#d4af37]/10">
+          <div class="inline-flex p-3 rounded-2xl bg-[#ff6b00]/15 border border-[#ff6b00]/40 text-[#fb923c] mb-4 shadow-xl shadow-orange-500/10 animate-bounce">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
           <h3 class="font-serif text-3xl sm:text-4xl font-normal text-[#fdfbf7] mb-2 tracking-tight">
@@ -398,7 +398,7 @@ class AssessmentEngine {
               id="lead-name" 
               required 
               placeholder="e.g. Eleanor Vance" 
-              class="w-full px-4 py-3.5 rounded-xl bg-[#141720] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/30 text-sm transition-all"
+              class="w-full px-4 py-3.5 rounded-xl bg-[#141722] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/30 text-sm transition-all"
             />
           </div>
 
@@ -409,7 +409,7 @@ class AssessmentEngine {
               id="lead-email" 
               required 
               placeholder="eleanor@company.com" 
-              class="w-full px-4 py-3.5 rounded-xl bg-[#141720] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/30 text-sm transition-all"
+              class="w-full px-4 py-3.5 rounded-xl bg-[#141722] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/30 text-sm transition-all"
             />
           </div>
 
@@ -419,7 +419,7 @@ class AssessmentEngine {
               type="text" 
               id="lead-role" 
               placeholder="e.g. Managing Director, Founder, VP" 
-              class="w-full px-4 py-3.5 rounded-xl bg-[#141720] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/30 text-sm transition-all"
+              class="w-full px-4 py-3.5 rounded-xl bg-[#141722] border border-stone-700 text-[#fdfbf7] placeholder-stone-500 focus:outline-none focus:border-[#ff6b00] focus:ring-2 focus:ring-[#ff6b00]/30 text-sm transition-all"
             />
           </div>
 
@@ -427,15 +427,15 @@ class AssessmentEngine {
             <button 
               type="submit" 
               id="submit-lead-btn"
-              class="w-full py-4 px-6 rounded-xl font-bold text-slate-950 btn-gold-primary transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base"
+              class="w-full py-4 px-6 rounded-xl font-bold text-slate-950 btn-gold-primary transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base group"
             >
               <span>Reveal My S.L.I.D.E. Profile & Download PDF</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </button>
           </div>
 
           <p class="text-xs text-center text-stone-500 pt-2 flex items-center justify-center gap-1.5 font-serif italic">
-            <svg class="w-3.5 h-3.5 text-[#d4af37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <svg class="w-3.5 h-3.5 text-[#ff6b00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             Zero Spam • 100% Confidentiality • Immediate PDF Transmission
           </p>
         </form>
@@ -444,7 +444,7 @@ class AssessmentEngine {
 
     setTimeout(() => {
       const card = document.getElementById("lead-capture-card");
-      if (card) card.classList.remove("opacity-0", "translate-y-2");
+      if (card) card.classList.remove("opacity-0", "translate-y-3");
     }, 20);
   }
 
@@ -465,7 +465,7 @@ class AssessmentEngine {
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        Synthesizing S.L.I.D.E. Dossier...
+        Synthesizing S.L.I.D.E. Matrix...
       `;
     }
 
@@ -480,7 +480,7 @@ class AssessmentEngine {
 
     setTimeout(() => {
       this.renderResults(primaryPillar);
-    }, 750);
+    }, 700);
   }
 
   renderResults(pillarKey) {
@@ -490,28 +490,28 @@ class AssessmentEngine {
     const profile = diagnosticData.resultsProfiles[pillarKey] || diagnosticData.resultsProfiles["S"];
 
     this.container.innerHTML = `
-      <div class="transition-all duration-300 transform opacity-0 translate-y-2" id="results-card">
+      <div class="transition-all duration-500 transform opacity-0 scale-95 animate-spring-pop" id="results-card">
         
-        <!-- Results Header Card -->
-        <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#181b26] to-[#0f1118] border border-[#d4af37]/30 mb-8 shadow-2xl relative overflow-hidden">
-          <div class="absolute -right-12 -top-12 w-48 h-48 bg-[#d4af37]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Results Header Card with Celebratory Glow -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#1c1f2e] to-[#0f1118] border border-[#d4af37]/40 mb-8 shadow-2xl relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-56 h-56 bg-[#ff6b00]/15 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
           
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#d4af37]/15 text-[#fde047] border border-[#d4af37]/35 text-xs font-semibold">
-              <span class="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse"></span>
+              <span class="w-2 h-2 rounded-full bg-[#d4af37] animate-ping"></span>
               CONFIDENTIAL DIAGNOSIS FOR ${this.userData.name.toUpperCase()}
             </div>
-            <div class="text-xs font-mono text-[#fde047] bg-[#d4af37]/10 px-3.5 py-1.5 rounded-lg border border-[#d4af37]/25">
+            <div class="text-xs font-mono text-[#fde047] bg-[#d4af37]/15 px-3.5 py-1.5 rounded-lg border border-[#d4af37]/30">
               ${profile.scorePercent}
             </div>
           </div>
 
           <div class="flex items-center gap-5 mb-4">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#fef08a] via-[#d4af37] to-[#aa820a] flex items-center justify-center font-serif font-black text-3xl text-slate-950 shadow-xl shadow-[#d4af37]/30 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#ffedd5] via-[#ff6b00] to-[#9a3412] flex items-center justify-center font-serif font-black text-3xl text-white shadow-xl shadow-orange-600/30 shrink-0 transform hover:rotate-6 transition-transform">
               ${profile.letter}
             </div>
             <div>
-              <span class="text-xs uppercase tracking-widest text-[#d4af37] font-bold block mb-0.5">Primary Bottleneck Identified</span>
+              <span class="text-xs uppercase tracking-widest text-[#d4af37] font-bold block mb-0.5 font-mono">Primary Bottleneck Identified</span>
               <h3 class="font-serif text-2xl sm:text-3xl font-normal text-white">
                 ${profile.title}
               </h3>
@@ -535,7 +535,7 @@ class AssessmentEngine {
           </h4>
           <div class="space-y-3">
             ${profile.antidote.map((step, idx) => `
-              <div class="p-4 sm:p-5 rounded-2xl bg-[#141720] border border-stone-800 flex items-start gap-3.5">
+              <div class="p-4 sm:p-5 rounded-2xl bg-[#141722] border border-stone-800 flex items-start gap-3.5 hover:border-[#d4af37]/30 transition-colors">
                 <span class="w-6 h-6 rounded-full bg-[#d4af37]/20 text-[#fef08a] border border-[#d4af37]/30 text-xs font-serif font-bold flex items-center justify-center shrink-0 mt-0.5">
                   ${idx + 1}
                 </span>
@@ -546,7 +546,7 @@ class AssessmentEngine {
         </div>
 
         <!-- Delivery & Resource Unlock Notification -->
-        <div class="p-6 rounded-2xl bg-[#141720] border border-stone-800 mb-8 flex flex-col md:flex-row items-center gap-6">
+        <div class="p-6 rounded-2xl bg-[#141722] border border-stone-800 mb-8 flex flex-col md:flex-row items-center gap-6">
           <div class="w-24 shrink-0 rounded-xl overflow-hidden border border-[#d4af37]/30 shadow-xl">
             <img src="assets/images/slide_playbook_mockup.jpg" alt="S.L.I.D.E. Playbook" class="w-full h-auto object-cover" />
           </div>
@@ -573,7 +573,7 @@ class AssessmentEngine {
         </div>
 
         <!-- Executive Consultation Link -->
-        <div class="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#1b1c26] to-[#12141c] border border-[#d4af37]/20">
+        <div class="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#1c1d2b] to-[#12141d] border border-[#d4af37]/20">
           <h5 class="font-serif text-xl sm:text-2xl text-white mb-2">
             Need Executive Advisory with Dr. Pat Baccili?
           </h5>
@@ -604,7 +604,7 @@ class AssessmentEngine {
 
     setTimeout(() => {
       const card = document.getElementById("results-card");
-      if (card) card.classList.remove("opacity-0", "translate-y-2");
+      if (card) card.classList.remove("opacity-0", "scale-95");
     }, 20);
   }
 

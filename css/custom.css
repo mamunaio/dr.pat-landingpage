@@ -1,6 +1,7 @@
 /* ========================================================
    Unstuckable.com - World-Class Bespoke Personal Branding Design System
    Dr. Pat Baccili, Ph.D. | Masterclass & Luxury Editorial Aesthetic
+   Upgraded Animations & Micro-Interactions
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
@@ -23,11 +24,146 @@
   --border-orange: rgba(255, 107, 0, 0.3);
 }
 
-/* Elegant Text Gradients */
+/* ========================================================
+   1. Keyframe Animations
+   ======================================================== */
+
+/* Float animations */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+@keyframes floatBadge1 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatBadge2 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px) translateX(2px);
+  }
+}
+
+/* Ambient glow pulsation */
+@keyframes warmBreathe {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15), inset 0 0 10px rgba(212, 175, 55, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.35), inset 0 0 18px rgba(212, 175, 55, 0.12);
+  }
+}
+
+/* Shimmer sweep on buttons */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+/* Text glint light sweep */
+@keyframes textGlint {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Liquid progress pulse */
+@keyframes liquidProgressGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(255, 107, 0, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8));
+  }
+}
+
+/* Scale-in spring */
+@keyframes springPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================================
+   2. Animation Helper Classes
+   ======================================================== */
+
+.animate-float-gentle {
+  animation: floatGentle 7s infinite ease-in-out;
+}
+
+.animate-float-badge-1 {
+  animation: floatBadge1 4.5s infinite ease-in-out;
+}
+
+.animate-float-badge-2 {
+  animation: floatBadge2 5.5s infinite ease-in-out;
+}
+
+.animate-warm-breathe {
+  animation: warmBreathe 8s infinite ease-in-out;
+}
+
+.animate-gold-pulse {
+  animation: goldPulse 4s infinite ease-in-out;
+}
+
+.animate-spring-pop {
+  animation: springPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Text Gradients & Glint */
 .text-gradient-gold {
   background: linear-gradient(135deg, #ffffff 0%, #fef3c7 25%, #e5c158 60%, #b8860b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.text-glint {
+  background: linear-gradient(90deg, #ffffff 0%, #fef08a 25%, #ffedd5 50%, #fde047 75%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGlint 6s infinite linear;
 }
 
 .text-gradient-orange {
@@ -44,97 +180,129 @@
 
 /* Hero Stage Effects */
 .hero-stage-glow {
-  background: radial-gradient(circle at 50% 45%, rgba(255, 107, 0, 0.2) 0%, rgba(37, 99, 235, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle at 50% 45%, rgba(255, 107, 0, 0.22) 0%, rgba(37, 99, 235, 0.18) 40%, transparent 70%);
 }
 
 .hero-cutout-shadow {
-  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 45px rgba(255, 107, 0, 0.25));
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 45px rgba(255, 107, 0, 0.28));
 }
 
-/* Luxury Glows & Animations */
-@keyframes warmBreathe {
-  0%, 100% {
-    opacity: 0.45;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.75;
-    transform: scale(1.05);
-  }
+/* ========================================================
+   3. Scroll Reveal Animation Classes
+   ======================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-@keyframes goldPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.05);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(212, 175, 55, 0.3), inset 0 0 25px rgba(212, 175, 55, 0.1);
-  }
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.animate-warm-breathe {
-  animation: warmBreathe 8s infinite ease-in-out;
+/* Stagger delays for children */
+.stagger-delay-1 { transition-delay: 80ms; }
+.stagger-delay-2 { transition-delay: 160ms; }
+.stagger-delay-3 { transition-delay: 240ms; }
+.stagger-delay-4 { transition-delay: 320ms; }
+.stagger-delay-5 { transition-delay: 400ms; }
+
+/* Scale Reveal for visual features */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.animate-gold-pulse {
-  animation: goldPulse 4s infinite ease-in-out;
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
 }
 
-/* Cards & Glassmorphism */
+/* ========================================================
+   4. Interactive Cards & Hover Micro-Interactions
+   ======================================================== */
+
 .luxury-glass-card {
   background: linear-gradient(180deg, rgba(20, 23, 33, 0.85) 0%, rgba(12, 14, 20, 0.95) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-}
-
-.luxury-glass-card-hover {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.luxury-glass-card-hover:hover {
-  border-color: rgba(212, 175, 55, 0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.12);
+.luxury-glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.38);
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.12);
 }
 
 .executive-tab-active {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 107, 0, 0.12) 100%) !important;
-  border-color: rgba(212, 175, 55, 0.7) !important;
-  box-shadow: 0 12px 30px -5px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.75) !important;
+  box-shadow: 0 12px 30px -5px rgba(212, 175, 55, 0.35), inset 0 0 20px rgba(212, 175, 55, 0.15) !important;
+  transform: translateY(-2px);
 }
 
-/* Luxury Buttons */
+/* ========================================================
+   5. Buttons with Dynamic Shimmer Sweep
+   ======================================================== */
+
 .btn-gold-primary {
+  position: relative;
   background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 20%, #f59e0b 65%, #d97706 100%);
   color: #08090d;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.22);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.btn-gold-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+}
+
+.btn-gold-primary:hover::after {
+  animation: shimmerSweep 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-gold-primary:hover {
   background: linear-gradient(135deg, #ffffff 0%, #fef08a 25%, #fbbf24 65%, #b45309 100%);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+  transform: translateY(-1.5px);
 }
 
 .btn-gold-secondary {
+  position: relative;
   background: rgba(18, 20, 28, 0.9);
   color: #fdfbf7;
   border: 1px solid rgba(212, 175, 55, 0.3);
-  transition: all 0.25s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .btn-gold-secondary:hover {
   background: rgba(28, 32, 45, 0.95);
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.2);
   transform: translateY(-1.5px);
 }
 
-/* Custom Scrollbar */
+/* ========================================================
+   6. Custom Scrollbar & Accordions
+   ======================================================== */
+
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -152,15 +320,19 @@
   background: #393e54;
 }
 
-/* Accordion Smooth Transitions */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
   opacity: 0;
 }
 
 .accordion-content.open {
   max-height: 500px;
   opacity: 1;
+}
+
+/* Liquid Glow Progress Bar */
+.liquid-progress {
+  animation: liquidProgressGlow 2.5s infinite ease-in-out;
 }

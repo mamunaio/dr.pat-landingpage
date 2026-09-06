@@ -1,10 +1,11 @@
 /**
  * Unstuckable.com - Main Application Scripts
  * Executive Luxury Theme (Champagne Gold & Warm Obsidian)
- * Interactive S.L.I.D.E. tabs, agitation comparison, video modal, and UI controls
+ * Upgraded Animations, Scroll Reveal & Interactive Controls
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initScrollReveal();
   initSlideTabs();
   initAgitationToggle();
   initVideoModal();
@@ -14,7 +15,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================
-   1. S.L.I.D.E. Framework Interactive Tabs
+   1. Scroll Reveal Engine (Intersection Observer)
+   ========================================================== */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal-on-scroll, .reveal-scale");
+
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: "0px 0px -60px 0px",
+    threshold: 0.12
+  });
+
+  revealElements.forEach((el) => observer.observe(el));
+}
+
+/* ==========================================================
+   2. S.L.I.D.E. Framework Interactive Tabs
    ========================================================== */
 const slideFrameworkData = {
   S: {
@@ -29,8 +53,7 @@ const slideFrameworkData = {
       "Distinguish between empirical reality vs. inherited psychological conditioning.",
       "Rewrite the 1-sentence governing narrative of your current venture."
     ],
-    metric: "Eliminates ~40% of cognitive decision fatigue",
-    accentColor: "gold"
+    metric: "Eliminates ~40% of cognitive decision fatigue"
   },
   L: {
     letter: "L",
@@ -44,8 +67,7 @@ const slideFrameworkData = {
       "Renegotiate or formally sunset outdated relational and operational agreements.",
       "Protect executive focus by reclaiming high-yield creative capacity."
     ],
-    metric: "Reclaims 12-15 hours/week of clear strategic headspace",
-    accentColor: "amber"
+    metric: "Reclaims 12-15 hours/week of clear strategic headspace"
   },
   I: {
     letter: "I",
@@ -59,8 +81,7 @@ const slideFrameworkData = {
       "Map out 3 high-impact asymmetric opportunities with high upside.",
       "Align team vision around expansive momentum rather than defensive preservation."
     ],
-    metric: "Unlocks 3x more innovative strategic pathways",
-    accentColor: "copper"
+    metric: "Unlocks 3x more innovative strategic pathways"
   },
   D: {
     letter: "D",
@@ -74,8 +95,7 @@ const slideFrameworkData = {
       "Identify lateral leverage points, hidden champions, and alternative routes.",
       "Design agile, lightweight exploratory probes to test new corridors."
     ],
-    metric: "Reduces cycle time to breakthrough by up to 60%",
-    accentColor: "bronze"
+    metric: "Reduces cycle time to breakthrough by up to 60%"
   },
   E: {
     letter: "E",
@@ -89,8 +109,7 @@ const slideFrameworkData = {
       "Deploy real-world experiments to gather rapid empirical feedback.",
       "Anchor momentum with systematic accountability and reinforcement loops."
     ],
-    metric: "Generates measurable forward traction within 48 hours",
-    accentColor: "gold"
+    metric: "Generates measurable forward traction within 48 hours"
   }
 };
 
@@ -111,7 +130,7 @@ function initSlideTabs() {
     const data = slideFrameworkData[key];
     if (!data) return;
 
-    // Update active state on tab buttons
+    // Update active state on tab buttons with smooth feedback
     tabButtons.forEach(btn => {
       const btnKey = btn.getAttribute("data-slide-key");
       if (btnKey === key) {
@@ -126,7 +145,9 @@ function initSlideTabs() {
     // Content container transition
     const contentArea = document.getElementById("slide-detail-content");
     if (contentArea) {
-      contentArea.classList.add("opacity-0", "translate-y-2");
+      contentArea.style.opacity = "0";
+      contentArea.style.transform = "translateY(12px)";
+      
       setTimeout(() => {
         letterBadge.innerText = data.letter;
         nameDisplay.innerText = data.name;
@@ -137,16 +158,27 @@ function initSlideTabs() {
         if (metricDisplay) metricDisplay.innerText = data.metric;
 
         if (actionsList) {
-          actionsList.innerHTML = data.keyActions.map(action => `
-            <li class="flex items-start gap-3.5 text-sm sm:text-base text-stone-300">
+          actionsList.innerHTML = data.keyActions.map((action, idx) => `
+            <li class="flex items-start gap-3.5 text-sm sm:text-base text-stone-300 transform translate-y-2 opacity-0 transition-all duration-300" style="transition-delay: ${idx * 60}ms" id="action-item-${idx}">
               <span class="w-5 h-5 rounded-full bg-[#d4af37]/20 text-[#fef08a] border border-[#d4af37]/40 flex items-center justify-center shrink-0 mt-0.5 text-xs font-serif font-bold">✓</span>
               <span>${action}</span>
             </li>
           `).join("");
+
+          setTimeout(() => {
+            data.keyActions.forEach((_, idx) => {
+              const item = document.getElementById(`action-item-${idx}`);
+              if (item) {
+                item.style.opacity = "1";
+                item.style.transform = "translateY(0)";
+              }
+            });
+          }, 30);
         }
 
-        contentArea.classList.remove("opacity-0", "translate-y-2");
-      }, 150);
+        contentArea.style.opacity = "1";
+        contentArea.style.transform = "translateY(0)";
+      }, 160);
     }
   }
 
@@ -159,7 +191,7 @@ function initSlideTabs() {
 }
 
 /* ==========================================================
-   2. Agitation Section: Force vs Navigation Interactive Toggle
+   3. Agitation Section: Force vs Navigation Interactive Toggle
    ========================================================== */
 function initAgitationToggle() {
   const btnForce = document.getElementById("toggle-force-mode");
@@ -199,10 +231,11 @@ function initAgitationToggle() {
 }
 
 /* ==========================================================
-   3. 2-Minute Video / Explainer Modal
+   4. 2-Minute Video / Explainer Modal with Smooth Pop
    ========================================================== */
 function initVideoModal() {
   const modal = document.getElementById("video-modal");
+  const modalBox = modal ? modal.querySelector("div") : null;
   const openButtons = document.querySelectorAll(".open-video-modal-btn");
   const closeButtons = document.querySelectorAll(".close-video-modal-btn");
 
@@ -211,11 +244,29 @@ function initVideoModal() {
   function openModal() {
     modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
+    if (modalBox) {
+      modalBox.style.opacity = "0";
+      modalBox.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        modalBox.style.transition = "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)";
+        modalBox.style.opacity = "1";
+        modalBox.style.transform = "scale(1)";
+      }, 10);
+    }
   }
 
   function closeModal() {
-    modal.classList.add("hidden");
-    document.body.style.overflow = "auto";
+    if (modalBox) {
+      modalBox.style.opacity = "0";
+      modalBox.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 200);
+    } else {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
   }
 
   openButtons.forEach(btn => btn.addEventListener("click", openModal));
@@ -233,7 +284,7 @@ function initVideoModal() {
 }
 
 /* ==========================================================
-   4. FAQ Accordion
+   5. FAQ Accordion with Silky Smooth Expansion
    ========================================================== */
 function initFaqAccordion() {
   const items = document.querySelectorAll(".faq-item");
@@ -248,7 +299,7 @@ function initFaqAccordion() {
       trigger.addEventListener("click", () => {
         const isOpen = content.classList.contains("open");
 
-        // Close all
+        // Close all other items smoothly
         items.forEach(otherItem => {
           const otherContent = otherItem.querySelector(".faq-content");
           const otherIcon = otherItem.querySelector(".faq-icon");
@@ -256,7 +307,7 @@ function initFaqAccordion() {
           if (otherIcon) otherIcon.classList.remove("rotate-180");
         });
 
-        // Toggle current
+        // Toggle current item
         if (!isOpen) {
           content.classList.add("open");
           if (icon) icon.classList.add("rotate-180");
@@ -267,7 +318,7 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================
-   5. Mobile Navigation
+   6. Mobile Navigation Toggle
    ========================================================== */
 function initMobileNav() {
   const menuBtn = document.getElementById("mobile-menu-btn");
@@ -288,7 +339,7 @@ function initMobileNav() {
 }
 
 /* ==========================================================
-   6. Scroll Effects & Floating Diagnostic Pill
+   7. Scroll Effects & Floating Diagnostic Pill
    ========================================================== */
 function initScrollEffects() {
   const floatingPill = document.getElementById("floating-assessment-pill");
@@ -305,5 +356,5 @@ function initScrollEffects() {
       floatingPill.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
       floatingPill.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
     }
-  });
+  }, { passive: true });
 }
